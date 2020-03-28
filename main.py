@@ -12,17 +12,27 @@ Returns the sum of the longest run.
 def longest_run(arr):
     array = arr[:]
 
-    if len(array) < 2:
-        return None
+    # Not required since arr's length is assumed to be at least 2
+    # if len(array) < 2:
+    #     return None
+
+    # Return the sum of arr if length equals 2
     if len(array) == 2:
         return sum(array)
 
+    # The approach in solving the problem is break the list in to
+    # sub-list of monotonically increasing/decreasing integers
     mono_arrays = []
 
+    # Initialise the previous value
     previous = array[0]
+    # Current found monotonic list
     current_mono = [previous]
+
+    # Flag to toggle between checking increasing/decreasing integers
     toggle_check = True
 
+    # TODO: Make the code DRY
     for num in array[1:]:
         if toggle_check:
             if previous < num:
@@ -47,8 +57,9 @@ def longest_run(arr):
                 previous = num
 
     mono_arrays.append(current_mono[:])
-    # print(mono_arrays)
 
+    # Calculate the length of all monotonic sub-lists
     array_lengths = [len(array) for array in mono_arrays]
-    # print(array_lengths)
+    # Find the list with the max length. Get its position in the list.
+    # Use the index to retrieve the corresponding sub-list and return its sum
     return sum(mono_arrays[array_lengths.index(max(array_lengths))])
