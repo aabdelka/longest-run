@@ -34,13 +34,22 @@ def longest_run(arr):
 
     # TODO: Make the code DRY
     for num in array[1:]:
+        if previous == num:
+            # mono_arrays.append(current_mono[:])
+            # previous = num
+            if len(current_mono) > 1:
+                mono_arrays.append(current_mono[:])
+            current_mono.clear()
+            current_mono.append(num)
+            continue
         if toggle_check:
             if previous < num:
                 current_mono.append(num)
                 previous = num
             else:
                 toggle_check = False
-                mono_arrays.append(current_mono[:])
+                if len(current_mono) > 1:
+                    mono_arrays.append(current_mono[:])
                 # previous = num
                 current_mono.clear()
                 current_mono.append(previous)
@@ -50,14 +59,15 @@ def longest_run(arr):
                 previous = num
             else:
                 toggle_check = True
-                mono_arrays.append(current_mono[:])
+                if len(current_mono) > 1:
+                    mono_arrays.append(current_mono[:])
                 current_mono.clear()
                 current_mono.append(previous)
                 current_mono.append(num)
                 previous = num
 
     mono_arrays.append(current_mono[:])
-
+    # print(mono_arrays)
     # Calculate the length of all monotonic sub-lists
     array_lengths = [len(array) for array in mono_arrays]
     # Find the list with the max length. Get its position in the list.

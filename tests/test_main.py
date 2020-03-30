@@ -29,3 +29,15 @@ class Test(TestCase):
 
     def test_array_example_3(self):
         self.assertEqual(longest_run([9, 8, 7, 6, 5, 4, 3, 2, 1]), 45, 'Pure monotonically decreasing list')
+
+    def test_array_example_4(self):
+        self.assertEqual(longest_run([2, 2, 2, 3, 4, 5]), 14, 'Repeated elements larger than two')
+
+    def test_array_example_5(self):
+        self.assertEqual(longest_run([2, 2, 2, 2, 3, 4, 5]), 14, 'Repeated elements larger than three')
+
+    def test_array_example_6(self):
+        self.assertEqual(longest_run([2, 2, 2, 2, 2, 3, 4, 5]), 14, 'Repeated elements equal length of monotonic list')
+
+    def test_array_example_7(self):
+        self.assertEqual(longest_run([2, 2, 3, 4, 5, 2, 2, 2]), 14, 'Repeated elements equal length of monotonic list')
