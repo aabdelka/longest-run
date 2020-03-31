@@ -1,0 +1,182 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Created on Tue Mar 31 12:28:57 2020
+
+@author: Samir el Mustafa
+"""
+
+
+
+from unittest import TestCase
+from main import longest_run
+
+
+class Test(TestCase):
+    # def test_array_not_valid(self):
+    #     self.assertEqual(longest_run([1]), None, 'Does not return None on length of arrray < 2')
+
+    def test_array_length2(self):
+        self.assertEqual(longest_run([1, 2]), 3, 'Simple array [1, 2]')
+
+    def test_array_increasing(self):
+        self.assertEqual(longest_run([1, 2, 1, 3, 4, 5]), 13, 'Monotonically increasing list')
+
+    def test_array_decreasing(self):
+        self.assertEqual(longest_run([1, 2, 5, 4, 3, 1]), 13, 'Monotonically decreasing list')
+
+    def test_array_with_repeated_elements(self):
+        self.assertEqual(longest_run([1, 2, 5, 4, 4, 3, 2]), 8, 'Array containing repeated elements')
+
+    def test_array_example_1(self):
+        self.assertEqual(longest_run([1, 2, 3, 2, 1]), 6, 'Lists of equal length and content')
+
+    def test_array_example_2(self):
+        self.assertEqual(longest_run([1, 2, 3, 2, -1]), 6, 'List of equal length but different content')
+
+    def test_array_example_3(self):
+        self.assertEqual(longest_run([1, 2, 3, 4, 5, 6, 7, 8, 9]), 45, 'Pure monotonically increasing list')
+
+    def test_array_example_3(self):
+        self.assertEqual(longest_run([9, 8, 7, 6, 5, 4, 3, 2, 1]), 45, 'Pure monotonically decreasing list')
+
+    def test_array_example_4(self):
+        self.assertEqual(longest_run([2, 2, 2, 3, 4, 5]), 14, 'Repeated elements larger than two')
+
+    def test_array_example_5(self):
+        self.assertEqual(longest_run([2, 2, 2, 2, 3, 4, 5]), 14, 'Repeated elements larger than three')
+
+    def test_array_example_6(self):
+        self.assertEqual(longest_run([2, 2, 2, 2, 2, 3, 4, 5]), 14, 'Repeated elements equal length of monotonic list')
+
+    def test_array_example_7(self):
+        self.assertEqual(longest_run([2, 2, 3, 4, 5, 2, 2, 2]), 14, 'Repeated elements equal length of monotonic list')
+
+    def test_array_example_8(self):
+        self.assertEqual(longest_run([1, 2, 3, 2, 1, -10, -20, 3, 3, 3, 3, 3, 3, 3, 3, 3]), 7, 'Repeated elements equal length of monotonic list')
+
+    def test_array_example_9(self):
+        self.assertEqual(longest_run([1, 2, 3, 2, 1, -10, -20, 3, 4, 5, 7, 7, 8, 9, 11, 11]), 45, 'Repeated elements equal length of monotonic list')
+
+    def test_array_example_10(self):
+        self.assertEqual(longest_run([1, 2, 3, 2, -1]), 6, 'testing with negative values')
+
+
+''' More TCs
+
+Test: longest_run([1, 2, 3, 4, 5, 6, 7, 8, 9])
+
+Output:
+45
+Test: longest_run([1, 2, 3, 2, 1])
+
+Output:
+6
+Test: longest_run([3, 2, 1, 2, 3])
+
+Output:
+6
+Test: longest_run([1, 2, 1, 2, 1, 2, 1, 2, 1])
+
+Output:
+3
+Test: longest_run([1, 2, 3, 4, 5, 0, 10, 1, 2, 3, 4, 5])
+
+Output:
+15
+Test: longest_run([1, 2, 3, 10, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1])
+
+Output:
+65
+Test: longest_run([1, 2, 3, 2, -1])
+
+Output:
+6
+Test: longest_run([3, 2, -1, 2, 7])
+
+Output:
+4
+Test: longest_run([100, 200, 300, -100, -200, -1500, -5000])
+
+Output:
+-6500
+Test: longest_run([100, 200, 300, 400, 0, 10000, 20000])
+
+Output:
+1000
+Test: longest_run([1, 2, 3, 2, -1, -10])
+
+Output:
+-6
+Test: longest_run([3, 3, 3, 3, 3, 3, 3, -10, 1, 2, 3, 4])
+
+Output:
+11
+Test: longest_run([3, 4, 5, 6, 10, 20, 100, 200, 1, 3, 3, 3, -10, 1, 2, 3, 4])
+
+Output:
+348
+Test: longest_run([3, 3, 3, 3, 3])
+
+Output:
+15
+Test: longest_run([-3, -3, -3, -3, -3])
+
+Output:
+-15
+Test: longest_run([1, 2, 3, 2, 1, -10, -20, 3, 3, 3, 3, 3, 3, 3, 3, 3])
+
+Your output:
+27
+Correct output:
+7
+Test: longest_run([1, 2, 3, 2, 1, -10, -20, 3, 4, 5, 7, 7, 8, 9, 11, 11])
+
+Your output:
+34
+Correct output:
+45
+Test: longest_run([-10, -9, -8, -7, -6, -5, -3, -1, 1, 3, 5, 8, 10, 100, 1000, 10000])
+
+Output:
+11078
+Test: longest_run([-1, -2, -3, -4, -10, -100, -150, -169, -1000, -10000, -100000])
+
+Output:
+-111439
+Test: longest_run([1, 1, 2, 3, 5, 8, 10, 100, 1000, 10000])
+
+Output:
+11130
+Test: longest_run([100000, 10000, 1000, 100, 10, 8, 8, 5, 2, 1, 0])
+
+Output:
+111134
+Test: longest_run([1, 2, 3, 2, 1, 10, 100, 50, 20, 1000, 10000, 5000, 2000, 100000, 200000, 150000, 100000])
+
+Output:
+6
+Test: longest_run([100000, 150000, 200000, 100000, 2000, 5000, 10000, 1000, 20, 50, 100, 10, 1, 2, 3, 2, 1])
+
+Output:
+450000
+Test: longest_run([100, 10, 10, 10, 10, 10, 10, 10, 0])
+
+Output:
+170
+Test: longest_run([-100, -10, -10, -10, -10, -10, -10, -10, 0])
+
+Output:
+-170
+Test: longest_run([1, 10, 10, 10, 10, 10, 10, 100])
+
+Output:
+161
+Test: longest_run([-1, -10, -10, -10, -10, -10, -10, -100])
+
+Output:
+-161
+Test: longest_run([1, 2, 1, 2, 1, 2, 1, 2, -1, -2, -1, -2, 10, 20, 10, 20, 100, 200, 100, 0, 100, 0, 100, 0, 0, 100, 0, 0, 0, 100, 1500000, -1500000, 1, -150001])
+
+Output:
+1500100
